@@ -24,7 +24,7 @@ module.exports = {
   GOODBYE_MSG: process.env.GOODBYE_MSG || "@user Left The Group",
   PACKNAME: process.env.PACKNAME || "ᴡʜᴀᴛꜱ",
   AUTHOR: process.env.AUTHOR || "ʙɪxʙʏ",
-  SUDO: process.env.SUDO || "919446072492",
+  SUDO: process.env.SUDO || "919895809960",
   HEROKU_APP_NAME: process.env.HEROKU_APP_NAME || "",
   HEROKU_API_KEY: process.env.HEROKU_API_KEY || "",
   OWNER_NAME: process.env.OWNER_NAME || "Ziyan",
