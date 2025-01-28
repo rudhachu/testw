@@ -9,28 +9,29 @@ const { UpdateLocal, overrideConsoleLogs } = require("./lib");
 
 global.__basedir = __dirname;
 
-process.on('message', (data) => {
-    if (data.type === 'overrideLogs') {
-        // Override console methods in the worker process
-        overrideConsoleLogs();
-    }
+// Override console methods in the worker process
+process.on("message", (data) => {
+  if (data.type === "overrideLogs") {
+    overrideConsoleLogs();
+  }
 });
 
+// Auth function to generate session credentials and initialize the bot
 async function auth() {
   try {
-      if (!fs.existsSync("./lib/session/creds.json")) {
-    await MakeSession(config.SESSION_ID, "./lib/session");
-    console.log("Version : " + require("./package.json").version);
-  }
-  console.log("WhatsApp Bot Initializing...");
+    if (!fsx.existsSync("./lib/session/creds.json")) {
+      await MakeSession(config.SESSION_ID, "./lib/session");
+      console.log("Version : " + require("./package.json").version);
     }
+    console.log("WhatsApp Bot Initializing...");
     return initialize();
   } catch (error) {
     console.error("AuthFile Generation Error:", error);
-    return process.exit(1);
+    process.exit(1);
   }
 }
 
+// Reads and requires all `.js` files in a directory
 const readAndRequireFiles = async (directory) => {
   try {
     const files = await fs.readdir(directory);
@@ -45,21 +46,28 @@ const readAndRequireFiles = async (directory) => {
   }
 };
 
+// Main initialization function
 async function initialize() {
-  console.log("============> WhatsBixby [Codex] <============");
+  console.log("============> ッ <============");
   try {
+    // Load database-related files
     await readAndRequireFiles(path.join(__dirname, "/lib/db/"));
     console.log("Syncing Database");
     await config.DATABASE.sync();
+
+    // Install plugins
     console.log("⬇  Installing Plugins...");
     await readAndRequireFiles(path.join(__dirname, "/plugins/"));
     await getandRequirePlugins();
     console.log("✅ Plugins Installed!");
-    return  await connect();
+
+    // Connect to services
+    return await connect();
   } catch (error) {
     console.error("Initialization error:", error);
-    return process.exit(1); // Exit with error status
+    process.exit(1); // Exit with error status
   }
 }
 
+// Start the authentication process
 auth();
