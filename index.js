@@ -2,9 +2,10 @@ const fs = require("fs").promises;
 const fsx = require("fs");
 const path = require("path");
 const config = require("./config");
+const { MakeSession } = require("./lib/session");
 const connect = require("./lib/connection");
 const { getandRequirePlugins } = require("./lib/db/plugins");
-const { UpdateLocal, WriteSession, overrideConsoleLogs } = require("./lib");
+const { UpdateLocal, overrideConsoleLogs } = require("./lib");
 
 global.__basedir = __dirname;
 
