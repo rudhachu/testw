@@ -1,9 +1,3 @@
-/* Copyright (C) 2025 Codex.
-Licensed under the MIT License;
-you may not use this file except in compliance with the License.
-Codex - Ziyan
-*/
-
 const fs = require("fs").promises;
 const fsx = require("fs");
 const path = require("path");
@@ -23,8 +17,11 @@ process.on('message', (data) => {
 
 async function auth() {
   try {
-    if (!fsx.existsSync("./lib/session/creds.json")) {
-      await WriteSession();
+      if (!fs.existsSync("./lib/session/creds.json")) {
+    await MakeSession(config.SESSION_ID, "./lib/session");
+    console.log("Version : " + require("./package.json").version);
+  }
+  console.log("WhatsApp Bot Initializing...");
     }
     return initialize();
   } catch (error) {
