@@ -1,9 +1,3 @@
-/* Copyright (C) 2025 Codex.
-Licensed under the MIT License;
-you may not use this file except in compliance with the License.
-Codex - Ziyan
-*/
-
 const { Bixby, fromMe, isPrivate, toAudio, getBuffer } = require("../lib/");
 const { webp2mp4, textToImg } = require("../lib/functions");
 const {PACKNAME, AUTHOR, BASE_URL, API_KEY } = require("../config");
@@ -23,9 +17,7 @@ Bixby(
       );
     let packid = match.split("/addstickers/")[1];
     let { result } = await getJson(
-      `https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getStickerSet?name=${encodeURIComponent(
-        packid
-      )}`
+      `put_url`
     );
     if (result.is_animated)
       return message.reply(" *Animated Stickers Are Not Supported*  ");
